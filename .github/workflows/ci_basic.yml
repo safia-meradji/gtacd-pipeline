@@ -1,0 +1,23 @@
+name: CI - Vérification de l'application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code du dépôt
+        uses: actions/checkout@v3
+
+      - name: Afficher le contenu de index.html
+        run: cat app/index.html
+
+      - name: Rendre check_app.sh exécutable
+        run: chmod +x app/check_app.sh
+
+      - name: Exécuter le script de vérification
+        run: ./app/check_app.sh
