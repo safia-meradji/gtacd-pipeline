@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Récupérer le code du dépôt
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Afficher le contenu de index.html
         run: cat app/index.html
