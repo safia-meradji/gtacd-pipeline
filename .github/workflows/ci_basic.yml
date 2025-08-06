@@ -23,5 +23,5 @@ jobs:
         run: ./app/check_app.sh
 
       - name: Afficher le secret (Job 3)
-        run: echo 'Mon secret est : ${{ secrets.MY_SECRET }}'
+        run: echo "Mon secret est : ${{ secrets.MY_SECRET }}"
 
