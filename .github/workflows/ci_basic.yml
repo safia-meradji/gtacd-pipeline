@@ -1,4 +1,4 @@
-name: CI - Vérification de l'application
+name: Job 3 - Affichage du secret MY_SECRET dans le workflow
 
 on:
   push:
@@ -8,18 +8,19 @@ on:
 jobs:
   test-app:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Récupérer le code du dépôt
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Afficher le contenu de index.html
+      - name: Show content of index.html
         run: cat app/index.html
 
-      - name: Rendre check_app.sh exécutable
+      - name: Make check_app.sh executable
         run: chmod +x app/check_app.sh
 
-      - name: Exécuter le script de vérification
+      - name: Run verification script
         run: ./app/check_app.sh
 
-      - name: Afficher le secret (Job 3)
+      - name: Display secret (Job 3)
         run: echo "Mon secret est : ${{ secrets.MY_SECRET }}"
