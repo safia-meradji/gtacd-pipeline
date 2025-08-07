@@ -1,0 +1,49 @@
+---
+- name: Déploiement de l'application web
+  hosts: webserver
+  become: true  # <== Activation du sudo pour toutes les tâches
+  vars:
+    server_ip: "{{ inventory_hostname }}"
+
+  tasks:
+    - name: Installer Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Créer le répertoire de l'application
+      file:
+        path: /var/www/html/tp-app
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Copier les fichiers de l'application
+      copy:
+        src: ../check_app.sh
+        dest: /var/www/html/tp-app/check_app.sh
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Copier la configuration Nginx
+      template:
+        src: nginx_vhost.conf.j2
+        dest: /etc/nginx/sites-available/tp-app
+      notify:
+        - Redémarrer Nginx
+
+    - name: Activer le site tp-app
+      file:
+        src: /etc/nginx/sites-available/tp-app
+        dest: /etc/nginx/sites-enabled/tp-app
+        state: link
+        force: yes
+
+  handlers:
+    - name: Redémarrer Nginx
+      service:
+        name: nginx
+        state: restarted
