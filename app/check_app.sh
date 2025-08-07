@@ -1,4 +1,4 @@
 #!/bin/bash
-echo "Début des vérifications..."
+echo "DÃ©but des vÃ©rifications..."
 echo " Fichier index.html manquant"
 exit 1
