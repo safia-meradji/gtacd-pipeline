@@ -20,15 +20,15 @@
         group: www-data
         mode: '0755'
 
-    - name: Copier les fichiers de l'application
+    - name: Copier le script de vérification
       copy:
         src: ../check_app.sh
         dest: /var/www/html/tp-app/check_app.sh
         owner: www-data
         group: www-data
         mode: '0755'
-    
-    - name: Copier index.html
+
+    - name: Copier le fichier HTML de l'application
       copy:
         src: ../app/index.html
         dest: /var/www/html/tp-app/index.html
